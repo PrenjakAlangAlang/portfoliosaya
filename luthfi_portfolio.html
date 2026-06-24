@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luthfi Nurafiq — Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          'space': ['Space Grotesk', 'sans-serif'],
+          'inter': ['Inter', 'sans-serif'],
+          'mono': ['JetBrains Mono', 'monospace'],
+        },
+        colors: {
+          'dark': {
+            bg0: '#0A0F1E',
+            bg1: '#0F1628',
+            bg2: '#1a2540',
+            bg3: '#1E3A5F',
+            card: '#111827',
+            border: '#1E3A5F',
+          },
+          'light': {
+            bg0: '#F0F6FF',
+            bg1: '#FFFFFF',
+            bg2: '#EFF6FF',
+            bg3: '#DBEAFE',
+            card: '#FFFFFF',
+            border: '#BFDBFE',
+          },
+          'accent': {
+            DEFAULT: '#3B82F6',
+            2: '#60A5FA',
+            3: '#93C5FD',
+          }
+        },
+        animation: {
+          'blink': 'blink 1s step-end infinite',
+          'scrollbounce': 'scrollbounce 1.5s ease-in-out infinite',
+        },
+        keyframes: {
+          blink: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } },
+          scrollbounce: {
+            '0%, 100%': { transform: 'rotate(45deg) translateY(0)' },
+            '50%': { transform: 'rotate(45deg) translateY(5px)' }
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  /* Base body */
+  body { font-family: 'Inter', sans-serif; }
+  /* Dark mode default */
+  body { background-color: #0A0F1E; color: #E0F2FE; }
+  body.light { background-color: #F0F6FF; color: #0F172A; }
+
+  /* NAV */
+  nav { background: rgba(10,15,30,0.8); }
+  body.light nav { background: rgba(240,246,255,0.85); }
+
+  /* Toggle button */
+  .toggle-btn { width: 40px; height: 22px; border-radius: 11px; border: 1.5px solid #3B82F6; background: transparent; cursor: pointer; position: relative; transition: background .3s; flex-shrink: 0; }
+  .toggle-btn::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #3B82F6; transition: transform .3s; }
+  body.light .toggle-btn::after { transform: translateX(18px); }
+
+  /* Cursor blink */
+  .cursor { display: inline-block; width: 2px; height: 1.1em; background: #3B82F6; vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* Scroll arrow */
+  .scroll-arrow { width: 20px; height: 20px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); animation: scrollbounce 1.5s ease-in-out infinite; }
+  @keyframes scrollbounce { 0%,100% { transform: rotate(45deg) translateY(0); } 50% { transform: rotate(45deg) translateY(5px); } }
+
+  /* Reveal animation */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+
+  /* Card & border colors based on theme */
+  .card-bg { background-color: #111827; border-color: #1E3A5F; }
+  body.light .card-bg { background-color: #FFFFFF; border-color: #BFDBFE; }
+
+  .text-muted { color: #94A3B8; }
+  body.light .text-muted { color: #334155; }
+
+  .text-dimmer { color: #64748B; }
+  body.light .text-dimmer { color: #64748B; }
+
+  .text-bright { color: #E0F2FE; }
+  body.light .text-bright { color: #0F172A; }
+
+  .section-bg-alt { background-color: #0F1628; }
+  body.light .section-bg-alt { background-color: #FFFFFF; }
+
+  .border-theme { border-color: #1E3A5F; }
+  body.light .border-theme { border-color: #BFDBFE; }
+
+  .nav-link { color: #94A3B8; }
+  body.light .nav-link { color: #334155; }
+  .nav-link:hover { color: #60A5FA; }
+
+  /* Project img placeholder */
+  .project-img-placeholder { height: 310px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+</style>
+</head>
+
+<body class="overflow-x-hidden leading-relaxed transition-colors duration-300">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 px-8 py-4 flex justify-between items-center backdrop-blur-md border-b border-theme transition-all duration-300">
+  <div class="font-space font-bold text-lg text-blue-400 tracking-tight">LNA</div>
+  <div class="flex gap-8 items-center">
+    <a href="#about" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">About</a>
+    <a href="#skills" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">Skills</a>
+    <a href="#projects" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">Projects</a>
+    <a href="#contact" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">Contact</a>
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme"></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="relative min-h-screen flex flex-col justify-center items-center text-center px-8 pt-24 pb-16 overflow-hidden">
+  <canvas id="stars" class="absolute inset-0 w-full h-full"></canvas>
+  <div class="relative z-10">
+    <p class="font-mono text-xs text-blue-400 tracking-widest mb-6 opacity-80">// hello world — welcome to my portfolio</p>
+    <h1 class="font-space text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-3">
+      Luthfi Nurafiq<br><span class="text-blue-400">Asshiddiqi</span>
+    </h1>
+    <p class="font-mono text-base md:text-lg text-muted mb-8 min-h-[1.8em]" id="typewriter"><span class="cursor"></span></p>
+    <div class="flex gap-4 justify-center flex-wrap">
+      <a href="#projects" class="px-7 py-3 rounded-lg bg-blue-500 text-white font-semibold text-sm hover:opacity-90 hover:-translate-y-px transition-all duration-200">Lihat Projects</a>
+      <a href="#contact" class="px-7 py-3 rounded-lg border-2 border-blue-500 text-blue-400 font-semibold text-sm hover:bg-blue-500/10 hover:-translate-y-px transition-all duration-200">Hubungi Saya</a>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-dimmer text-xs">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="py-20 px-8 max-w-4xl mx-auto">
+  <div class="reveal">
+    <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">01 // TENTANG SAYA</p>
+    <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Siapa Saya?</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
+    <div>
+      <div class="w-28 h-28 rounded-full bg-gradient-to-br from-blue-500 to-blue-900 flex items-center justify-center font-space text-4xl font-bold text-white mb-6 border-4 border-blue-500 overflow-hidden flex-shrink-0">
+        <img src="images/124220021_Pas Foto_Warna.jpeg" alt="Foto Luthfi Nurafiq Asshiddiqi" class="w-full h-full object-cover block">
+      </div>
+      <div class="space-y-3">
+        <p class="text-muted text-sm">Saya adalah seorang fresh graduate S1 Sistem Informasi dari UPN "Veteran" Yogyakarta, dengan passion di bidang pengembangan web, mobile, dan backend.</p>
+        <p class="text-muted text-sm">Saya senang membangun produk digital yang tidak hanya fungsional, tetapi juga memberikan pengalaman pengguna yang menyenangkan.</p>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-3 text-sm text-muted">
+        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">🎓</div>
+        <div><strong class="text-bright">S1 Sistem Informasi</strong><br>UPN "Veteran" Yogyakarta</div>
+      </div>
+      <div class="flex items-center gap-3 text-sm text-muted">
+        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">📍</div>
+        <div><strong class="text-bright">Yogyakarta</strong><br>Indonesia</div>
+      </div>
+      <div class="flex items-center gap-3 text-sm text-muted">
+        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">💼</div>
+        <div><strong class="text-bright">Open to Work</strong><br>Full-time / Freelance</div>
+      </div>
+      <div class="flex items-center gap-3 text-sm text-muted">
+        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">✉️</div>
+        <div><strong class="text-bright">luthfinurafiq76@email.com</strong><br>Siap untuk berkolaborasi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section-bg-alt py-20 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="reveal">
+      <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">02 // KEAHLIAN</p>
+      <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Tech Stack</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
+
+      <!-- React.js -->
+      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
+        <div class="text-3xl mb-3">⚛️</div>
+        <div class="font-space text-base font-semibold mb-1 text-bright">React.js</div>
+        <div class="text-xs text-muted mb-3">Membangun antarmuka web yang dinamis, responsif, dan interaktif dengan ekosistem React modern.</div>
+        <div class="flex flex-wrap gap-1">
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Hooks</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Redux</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Next.js</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Tailwind</span>
+        </div>
+      </div>
+
+      <!-- Golang -->
+      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
+        <div class="text-3xl mb-3">🐹</div>
+        <div class="font-space text-base font-semibold mb-1 text-bright">Golang</div>
+        <div class="text-xs text-muted mb-3">Mengembangkan backend dan REST API yang cepat, efisien, dan scalable menggunakan Go.</div>
+        <div class="flex flex-wrap gap-1">
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Gin</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Fiber</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">REST API</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">GORM</span>
+        </div>
+      </div>
+
+      <!-- Flutter -->
+      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
+        <div class="text-3xl mb-3">📱</div>
+        <div class="font-space text-base font-semibold mb-1 text-bright">Flutter</div>
+        <div class="text-xs text-muted mb-3">Membuat aplikasi mobile cross-platform untuk Android & iOS dari satu codebase.</div>
+        <div class="flex flex-wrap gap-1">
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Dart</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">BLoC</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">GetX</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Firebase</span>
+        </div>
+      </div>
+
+      <!-- Database -->
+      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
+        <div class="text-3xl mb-3">🗄️</div>
+        <div class="font-space text-base font-semibold mb-1 text-bright">Database</div>
+        <div class="text-xs text-muted mb-3">Merancang dan mengelola database relasional maupun non-relasional untuk berbagai kebutuhan.</div>
+        <div class="flex flex-wrap gap-1">
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">MySQL</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">PostgreSQL</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">MongoDB</span>
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
+        <div class="text-3xl mb-3">🐧</div>
+        <div class="font-space text-base font-semibold mb-1 text-bright">DevOps & Tools</div>
+        <div class="text-xs text-muted mb-3">Familiar dengan toolchain modern untuk development dan deployment aplikasi.</div>
+        <div class="flex flex-wrap gap-1">
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Docker</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Git</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Linux</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">CI/CD</span>
+        </div>
+      </div>
+
+      <!-- UI/UX -->
+      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
+        <div class="text-3xl mb-3">🎨</div>
+        <div class="font-space text-base font-semibold mb-1 text-bright">UI/UX Design</div>
+        <div class="text-xs text-muted mb-3">Mendesain antarmuka yang intuitif dan estetis sebelum diimplementasikan ke kode.</div>
+        <div class="flex flex-wrap gap-1">
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Figma</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Prototyping</span>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Wireframe</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-20 px-8 max-w-4xl mx-auto">
+  <div class="reveal">
+    <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">03 // PROYEK</p>
+    <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Yang Pernah Saya Buat</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal">
+
+    <!-- Project 1 -->
+    <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
+      <div class="h-50 overflow-hidden">
+        <img src="images/Alquran.png" alt="Screenshot Al-Quran Mobile" class="w-full h-auto object-cover block">
+      </div>
+      <div class="p-6">
+        <div class="font-space text-base font-semibold mb-1 text-bright">Al-Quran Mobile</div>
+        <div class="text-xs text-muted mb-3">Aplikasi mobile Al-Quran dengan tampilan sederhana untuk membaca surah dan ayat. Dibuat menggunakan Flutter dan didukung database Firebase.</div>
+        <div class="flex flex-wrap gap-1 mb-3">
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Flutter</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Dart</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Firebase</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Mobile App</span>
+        </div>
+        <div class="flex gap-2">
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">🔗 Detail</a>
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
+      <div class="h-50 overflow-hidden">
+        <img src="images/presensi.png" alt="Screenshot Sistem Absensi" class="w-full h-auto object-cover block">
+      </div>
+      <div class="p-6">
+        <div class="font-space text-base font-semibold mb-1 text-bright">Sistem Absensi Web Berbasis Geotagging</div>
+        <div class="text-xs text-muted mb-3">Sistem absensi siswa SMK berbasis web dengan validasi lokasi menggunakan algoritma Haversine. Dibangun untuk SMK Negeri 7 Yogyakarta.</div>
+        <div class="flex flex-wrap gap-1 mb-3">
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">PHP</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">MySQL</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Tailwind</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Haversine</span>
+        </div>
+        <div class="flex gap-2">
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">🔗 Demo</a>
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
+      <div class="h-50 overflow-hidden">
+        <img src="images/wisata.png" alt="Screenshot Website Wisata Jogja" class="w-full h-auto object-cover block">
+      </div>
+      <div class="p-6">
+        <div class="font-space text-base font-semibold mb-1 text-bright">Website Wisata Jogja</div>
+        <div class="text-xs text-muted mb-3">Website wisata Jogja yang menampilkan informasi destinasi, rekomendasi tempat menarik, dan pengalaman eksplorasi yang lebih mudah bagi pengguna.</div>
+        
+        <div class="flex gap-2">
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">🔗 Demo</a>
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
+      <div class="h-50 overflow-hidden">
+        <img src="images/Wiki.png" alt="Screenshot Website Wiki Pemda DIY" class="w-full h-auto object-cover block">
+      </div>
+      <div class="p-6">
+        <div class="font-space text-base font-semibold mb-1 text-bright">Website Wiki Pemda DIY</div>
+        <div class="text-xs text-muted mb-3">Website Wiki Pemda DIY yang dibuat menggunakan React untuk tampilan antarmuka dan Golang untuk backend API yang cepat dan terstruktur.</div>
+        <div class="flex flex-wrap gap-1 mb-3">
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">React.js</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Golang</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">REST API</span>
+          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Web App</span>
+        </div>
+        <div class="flex gap-2">
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">🔗 Demo</a>
+          <a href="#" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-bg-alt py-20 px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="reveal">
+      <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">04 // KONTAK</p>
+      <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Mari Berkolaborasi</h2>
+    </div>
+    <div class="card-bg border rounded-2xl p-12 text-center reveal">
+      <p class="text-muted mb-8 max-w-sm mx-auto text-sm">Saya terbuka untuk peluang kerja, proyek freelance, atau sekadar ngobrol soal teknologi. Jangan ragu untuk menghubungi saya!</p>
+      <div class="flex justify-center gap-3 flex-wrap">
+        <a href="mailto:luthfinurafiq76@email.com" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">✉️ Email</a>
+        <a href="https://www.linkedin.com/in/luthfi-nurafiq-asshiddiqi-637803205/" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">💼 LinkedIn</a>
+        <a href="https://github.com/PrenjakAlangAlang" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">🐙 GitHub</a>
+        <a href="#" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">📄 Download CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-8 px-8 text-dimmer text-xs border-t border-theme">
+  <p>Dibuat dengan ❤️ oleh <strong class="text-muted">Luthfi Nurafiq Asshiddiqi</strong> · 2026</p>
+</footer>
+
+<script>
+// Theme toggle
+const toggle = document.getElementById('themeToggle');
+let dark = true;
+toggle.addEventListener('click', () => {
+  dark = !dark;
+  document.body.classList.toggle('light', !dark);
+});
+
+// Typewriter
+const roles = [
+  'Full-Stack Web Developer',
+  'Mobile App Developer (Flutter)',
+  'Backend Engineer (Golang)',
+  'S1 Sistem Informasi — UPNVY'
+];
+let ri = 0, ci = 0, del = false;
+const tw = document.getElementById('typewriter');
+function type() {
+  const cur = roles[ri];
+  if (!del) {
+    ci++;
+    tw.innerHTML = cur.slice(0, ci) + '<span class="cursor"></span>';
+    if (ci === cur.length) { del = true; setTimeout(type, 1800); return; }
+  } else {
+    ci--;
+    tw.innerHTML = cur.slice(0, ci) + '<span class="cursor"></span>';
+    if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+  }
+  setTimeout(type, del ? 40 : 80);
+}
+type();
+
+// Stars canvas
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 120; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.3,
+      o: Math.random() * 0.5 + 0.1,
+      s: Math.random() * 0.3 + 0.05
+    });
+  }
+}
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.o += s.s * (Math.random() > 0.5 ? 1 : -1);
+    s.o = Math.max(0.05, Math.min(0.65, s.o));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(96,165,250,${s.o})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+resize(); initStars(); drawStars();
+window.addEventListener('resize', () => { resize(); initStars(); });
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
