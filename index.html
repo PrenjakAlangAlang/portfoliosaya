@@ -582,6 +582,104 @@
       transform: scale(1) !important;
     }
 
+    /* =========================================================
+       VAULTRA CUSTOM ANIMATED CURSOR
+       ========================================================= */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, textarea, select {
+        cursor: none !important;
+      }
+    }
+
+    #cursorDot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px #D946EF, 0 0 20px #D946EF;
+      transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    #cursorRing {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid rgba(217, 70, 239, 0.65);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 16px rgba(217, 70, 239, 0.25), inset 0 0 10px rgba(217, 70, 239, 0.15);
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                  height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.25s ease, 
+                  background-color 0.25s ease, 
+                  box-shadow 0.25s ease,
+                  opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    /* Hover state over links, buttons, cards */
+    #cursorRing.cursor-hover {
+      width: 50px;
+      height: 50px;
+      border-color: rgba(56, 189, 248, 0.85);
+      background-color: rgba(217, 70, 239, 0.12);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4), inset 0 0 15px rgba(217, 70, 239, 0.25);
+    }
+
+    #cursorDot.cursor-hover {
+      width: 8px;
+      height: 8px;
+      background: #38BDF8;
+      box-shadow: 0 0 12px #38BDF8, 0 0 22px #38BDF8;
+    }
+
+    /* Click / active state */
+    #cursorRing.cursor-clicking {
+      width: 24px;
+      height: 24px;
+      border-color: #FF3366;
+      background-color: rgba(255, 51, 102, 0.35);
+      box-shadow: 0 0 25px rgba(255, 51, 102, 0.6);
+    }
+
+    #cursorDot.cursor-clicking {
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    /* Subtle cursor particle trail */
+    .cursor-trail-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(217, 70, 239, 0.7);
+      box-shadow: 0 0 8px rgba(217, 70, 239, 0.9);
+      pointer-events: none;
+      z-index: 99997;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+
+    /* Disable custom cursor on touch/mobile */
+    @media (hover: none) and (pointer: coarse) {
+      #cursorDot, #cursorRing, .cursor-trail-dot {
+        display: none !important;
+      }
+    }
+
     /* Reduced Motion Mode */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -608,6 +706,10 @@
 </head>
 
 <body class="antialiased selection:bg-fuchsia-500/30 selection:text-white cosmic-dot-matrix">
+
+  <!-- ==================== CUSTOM ANIMATED VAULTRA CURSOR ==================== -->
+  <div id="cursorDot"></div>
+  <div id="cursorRing"></div>
 
   <!-- ==================== PERSISTENT FULL-PAGE COSMIC GLOBE BACKGROUND ==================== -->
   <div class="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0" id="globalGlobeContainer">
@@ -1633,6 +1735,110 @@
         mobileLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === href));
       });
     });
+
+    // 6. Custom Animated Vaultra Neon Cursor
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+
+    if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let isVisible = false;
+      let lastSparkTime = 0;
+
+      // Track cursor coordinates
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        if (!isVisible) {
+          isVisible = true;
+          cursorDot.style.opacity = '1';
+          cursorRing.style.opacity = '1';
+        }
+
+        // Instant response for center dot
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+
+        // Emit cosmic stardust particle trail on movement
+        const now = Date.now();
+        if (now - lastSparkTime > 45) {
+          lastSparkTime = now;
+          createStardust(mouseX, mouseY);
+        }
+      });
+
+      function createStardust(x, y) {
+        const spark = document.createElement('div');
+        spark.className = 'cursor-trail-dot';
+        spark.style.left = `${x}px`;
+        spark.style.top = `${y}px`;
+        document.body.appendChild(spark);
+
+        requestAnimationFrame(() => {
+          spark.style.transform = 'translate(-50%, -50%) scale(0.2)';
+          spark.style.opacity = '0';
+        });
+
+        setTimeout(() => {
+          spark.remove();
+        }, 450);
+      }
+
+      // Smooth lag / lerp loop for the outer glow ring
+      function renderCursor() {
+        const ease = 0.18;
+        ringX += (mouseX - ringX) * ease;
+        ringY += (mouseY - ringY) * ease;
+
+        cursorRing.style.left = `${ringX}px`;
+        cursorRing.style.top = `${ringY}px`;
+
+        requestAnimationFrame(renderCursor);
+      }
+      requestAnimationFrame(renderCursor);
+
+      // Mouse leave & enter window
+      document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+        cursorRing.style.opacity = '0';
+        isVisible = false;
+      });
+
+      document.addEventListener('mouseenter', () => {
+        cursorDot.style.opacity = '1';
+        cursorRing.style.opacity = '1';
+        isVisible = true;
+      });
+
+      // Click effects
+      window.addEventListener('mousedown', () => {
+        cursorRing.classList.add('cursor-clicking');
+        cursorDot.classList.add('cursor-clicking');
+      });
+
+      window.addEventListener('mouseup', () => {
+        cursorRing.classList.remove('cursor-clicking');
+        cursorDot.classList.remove('cursor-clicking');
+      });
+
+      // Interactive Hover Triggers
+      const interactiveElements = document.querySelectorAll(
+        'a, button, input, textarea, select, [role="button"], .glass-coin-chip, .vault-glass-card, .asset-card, .project-card, .glass-tag, .cta-pill-white, .cta-pill-outline'
+      );
+
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorRing.classList.add('cursor-hover');
+          cursorDot.classList.add('cursor-hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorRing.classList.remove('cursor-hover');
+          cursorDot.classList.remove('cursor-hover');
+        });
+      });
+    }
   </script>
 
 </body>
