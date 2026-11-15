@@ -1,486 +1,1639 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luthfi Nurafiq — Portfolio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        fontFamily: {
-          'space': ['Space Grotesk', 'sans-serif'],
-          'inter': ['Inter', 'sans-serif'],
-          'mono': ['JetBrains Mono', 'monospace'],
-        },
-        colors: {
-          'dark': {
-            bg0: '#0A0F1E',
-            bg1: '#0F1628',
-            bg2: '#1a2540',
-            bg3: '#1E3A5F',
-            card: '#111827',
-            border: '#1E3A5F',
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthfi Nurafiq — Portfolio</title>
+  
+  <!-- Fonts: Inter Display / Inter & Poppins & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Poppins', 'sans-serif'],
+            'display': ['Inter', 'sans-serif'],
+            'mono': ['JetBrains Mono', 'monospace'],
           },
-          'light': {
-            bg0: '#F0F6FF',
-            bg1: '#FFFFFF',
-            bg2: '#EFF6FF',
-            bg3: '#DBEAFE',
-            card: '#FFFFFF',
-            border: '#BFDBFE',
-          },
-          'accent': {
-            DEFAULT: '#3B82F6',
-            2: '#60A5FA',
-            3: '#93C5FD',
-          }
-        },
-        animation: {
-          'blink': 'blink 1s step-end infinite',
-          'scrollbounce': 'scrollbounce 1.5s ease-in-out infinite',
-        },
-        keyframes: {
-          blink: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } },
-          scrollbounce: {
-            '0%, 100%': { transform: 'rotate(45deg) translateY(0)' },
-            '50%': { transform: 'rotate(45deg) translateY(5px)' }
+          colors: {
+            night: {
+              950: '#020408',
+              900: '#050914',
+              850: '#070D1F',
+              800: '#0B142B',
+            },
+            vault: {
+              red: '#FF3366',
+              blue: '#2563EB',
+              cyan: '#38BDF8',
+              magenta: '#D946EF',
+              purple: '#A855F7',
+              pink: '#F472B6',
+            }
           }
         }
       }
     }
-  }
-</script>
-<style>
-  /* Base body */
-  body { font-family: 'Inter', sans-serif; }
-  /* Dark mode default */
-  body { background-color: #0A0F1E; color: #E0F2FE; }
-  body.light { background-color: #F0F6FF; color: #0F172A; }
+  </script>
 
-  /* NAV */
-  nav { background: rgba(10,15,30,0.8); }
-  body.light nav { background: rgba(240,246,255,0.85); }
+  <style>
+    /* =========================================================
+       GLOBAL VAULTRA DESIGN SYSTEM
+       ========================================================= */
+    :root {
+      --bg-night: #020408;
+      --card-bg: rgba(7, 12, 26, 0.72);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(217, 70, 239, 0.45);
+      --glow-magenta: rgba(217, 70, 239, 0.25);
+      --glow-blue: rgba(37, 99, 235, 0.22);
+      --glow-red: rgba(255, 51, 102, 0.18);
+    }
+    
+    html, body {
+      background-color: var(--bg-night);
+      color: #E2E8F0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* Toggle button */
-  .toggle-btn { width: 40px; height: 22px; border-radius: 11px; border: 1.5px solid #3B82F6; background: transparent; cursor: pointer; position: relative; transition: background .3s; flex-shrink: 0; }
-  .toggle-btn::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #3B82F6; transition: transform .3s; }
-  body.light .toggle-btn::after { transform: translateX(18px); }
+    ::selection {
+      background: rgba(217, 70, 239, 0.35);
+      color: #FFFFFF;
+    }
 
-  /* Cursor blink */
-  .cursor { display: inline-block; width: 2px; height: 1.1em; background: #3B82F6; vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    /* Cosmic Dotted Matrix Pattern for the entire page */
+    .cosmic-dot-matrix {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
 
-  /* Scroll arrow */
-  .scroll-arrow { width: 20px; height: 20px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); animation: scrollbounce 1.5s ease-in-out infinite; }
-  @keyframes scrollbounce { 0%,100% { transform: rotate(45deg) translateY(0); } 50% { transform: rotate(45deg) translateY(5px); } }
+    /* Ambient Hero Glow Rim (Red, Blue, Magenta) - Persistent Full Page */
+    .hero-glow-rim {
+      position: fixed;
+      bottom: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, 
+        rgba(217, 70, 239, 0.32) 0%, 
+        rgba(37, 99, 235, 0.26) 38%, 
+        rgba(255, 51, 102, 0.20) 65%, 
+        transparent 80%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  /* Reveal animation */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.show { opacity: 1; transform: translateY(0); }
+    /* Section Ambient Glow Orbs */
+    .glow-orb-magenta {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-  /* Card & border colors based on theme */
-  .card-bg { background-color: #111827; border-color: #1E3A5F; }
-  body.light .card-bg { background-color: #FFFFFF; border-color: #BFDBFE; }
+    .glow-orb-blue {
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-  .text-muted { color: #94A3B8; }
-  body.light .text-muted { color: #334155; }
+    .glow-orb-red {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 51, 102, 0.10) 0%, transparent 70%);
+      filter: blur(85px);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-  .text-dimmer { color: #64748B; }
-  body.light .text-dimmer { color: #64748B; }
+    /* Globe Plate and Masking - Fixed Full Page Background */
+    .globe-plate {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 70%, rgba(0,0,0,1) 45%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(ellipse 95% 85% at 50% 70%, rgba(0,0,0,1) 45%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0) 100%);
+    }
 
-  .text-bright { color: #E0F2FE; }
-  body.light .text-bright { color: #0F172A; }
+    @media (max-width: 768px) {
+      .globe-plate {
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.95) 24%, rgba(0,0,0,1) 100%);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.95) 24%, rgba(0,0,0,1) 100%);
+      }
+    }
 
-  .section-bg-alt { background-color: #0F1628; }
-  body.light .section-bg-alt { background-color: #FFFFFF; }
+    @media (min-width: 1536px) {
+      .globe-plate {
+        -webkit-mask-image: 
+          linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 86%, rgba(0,0,0,0) 100%),
+          linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 100%);
+        mask-image: 
+          linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 86%, rgba(0,0,0,0) 100%),
+          linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 100%);
+        -webkit-mask-composite: source-in;
+        mask-composite: intersect;
+      }
+    }
 
-  .border-theme { border-color: #1E3A5F; }
-  body.light .border-theme { border-color: #BFDBFE; }
+    .globe-layer {
+      position: absolute;
+      bottom: -6%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 1672px;
+      height: 100vh;
+      max-height: 941px;
+      object-fit: contain;
+      object-position: center bottom;
+      pointer-events: none;
+    }
 
-  .nav-link { color: #94A3B8; }
-  body.light .nav-link { color: #334155; }
-  .nav-link:hover { color: #60A5FA; }
+    @media (max-width: 768px) {
+      .globe-layer {
+        bottom: -2%;
+        height: 85vh;
+        object-fit: cover;
+        object-position: center bottom;
+      }
+    }
 
-  /* Project img placeholder */
-  .project-img-placeholder { height: 310px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .globe-still {
+      opacity: 1;
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-  /* Hero stars */
-  #stars { pointer-events: none; }
-</style>
+    .globe-video {
+      opacity: 0;
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .globe-video.is-ready {
+      opacity: 1;
+    }
+
+    /* Light Lines Across Dark Sky - Fixed Full Page */
+    .light-lines-svg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.75;
+    }
+
+    /* Section Divider Light Lines */
+    .vault-section-divider {
+      position: relative;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(37, 99, 235, 0.25) 20%, 
+        rgba(217, 70, 239, 0.5) 50%, 
+        rgba(255, 51, 102, 0.25) 80%, 
+        transparent 100%);
+    }
+    .vault-section-divider::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #D946EF, transparent);
+      filter: blur(1.5px);
+    }
+
+    /* Floating Glass Chips */
+    .glass-coin-chip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(11, 18, 36, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #E2E8F0;
+      pointer-events: auto;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 10;
+    }
+
+    .glass-coin-chip:hover {
+      transform: translateY(-3px) scale(1.05);
+      border-color: rgba(217, 70, 239, 0.6);
+      box-shadow: 0 10px 30px -4px rgba(217, 70, 239, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+    }
+
+    /* Vaultra Signature Gradient Headline (Inter Display 300) */
+    .gradient-headline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      letter-spacing: -0.035em;
+      background: linear-gradient(90deg, #F9A8D4 0%, #FDF2F8 22%, #FFFFFF 50%, #F5F3FF 78%, #D8B4FE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Section Sub-Headline in Gradient */
+    .section-gradient-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, #FFFFFF 0%, #FDF2F8 60%, #E9D5FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Glass pill badge */
+    .glass-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 9999px;
+      box-shadow: 0 0 20px rgba(217, 70, 239, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transition: all 0.3s ease;
+    }
+
+    .glass-badge:hover {
+      border-color: rgba(217, 70, 239, 0.4);
+      box-shadow: 0 0 28px rgba(217, 70, 239, 0.25);
+    }
+
+    /* Primary and Secondary CTA Pills */
+    .cta-pill-white {
+      background: #FFFFFF;
+      color: #030611;
+      font-weight: 600;
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25), 0 0 40px rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
+    }
+    .cta-pill-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4), 0 0 50px rgba(217, 70, 239, 0.3);
+      background: #F8FAFC;
+    }
+
+    .cta-pill-outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #F1F5F9;
+      font-weight: 500;
+      border-radius: 9999px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+    .cta-pill-outline:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    /* Vaultra Glass Card System (High-End Specular & Rim Glow) */
+    .vault-glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 1.25rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+    .vault-glass-card:hover {
+      border-color: var(--card-border-hover);
+      transform: translateY(-4px);
+      box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.25), 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 35px -5px rgba(217, 70, 239, 0.25);
+    }
+
+    /* Tech Stack Asset Card (Crypto Platform Asset Aesthetic) */
+    .asset-card {
+      background: rgba(8, 14, 30, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 1.25rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 15px 35px -12px rgba(0,0,0,0.6);
+    }
+    .asset-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(217, 70, 239, 0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .asset-card:hover::before {
+      opacity: 1;
+    }
+    .asset-card:hover {
+      border-color: rgba(217, 70, 239, 0.45);
+      transform: translateY(-4px);
+      box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.25), 0 22px 45px -12px rgba(0, 0, 0, 0.8), 0 0 30px -4px rgba(217, 70, 239, 0.22);
+    }
+
+    /* Protocol Project Showcase Card */
+    .project-card {
+      background: rgba(7, 12, 26, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.14), 0 20px 40px -15px rgba(0,0,0,0.7);
+    }
+    .project-card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      transform: translateY(-5px);
+      box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 35px -5px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Tag Chips in Glassmorphism */
+    .glass-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #93C5FD;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+    .glass-tag:hover {
+      border-color: rgba(217, 70, 239, 0.4);
+      background: rgba(217, 70, 239, 0.08);
+      color: #FDF2F8;
+    }
+
+    /* Entrance Animations */
+    @keyframes entranceRise {
+      0% {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .enter-nav {
+      animation: entranceRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+    }
+    .enter-pill {
+      opacity: 0;
+      animation: entranceRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+    }
+    .enter-headline {
+      opacity: 0;
+      animation: entranceRise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+    .enter-copy {
+      opacity: 0;
+      animation: entranceRise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .enter-cta {
+      opacity: 0;
+      animation: entranceRise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+    }
+    .enter-chips {
+      opacity: 0;
+      animation: entranceRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    }
+    .enter-scroll {
+      opacity: 0;
+      animation: entranceRise 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+    }
+
+    /* Floating Chip Animations */
+    @keyframes chipFloatA {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+    @keyframes chipFloatB {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(-1.5deg); }
+    }
+    .chip-float-1 { animation: chipFloatA 5s ease-in-out infinite; }
+    .chip-float-2 { animation: chipFloatB 6s ease-in-out 1s infinite; }
+    .chip-float-3 { animation: chipFloatA 5.5s ease-in-out 2s infinite; }
+    .chip-float-4 { animation: chipFloatB 6.5s ease-in-out 0.5s infinite; }
+
+    /* Scroll Mouse Animation */
+    @keyframes mouseWheelMove {
+      0% { transform: translateY(0); opacity: 1; }
+      80% { transform: translateY(6px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
+    .mouse-wheel {
+      animation: mouseWheelMove 2s ease-in-out infinite;
+    }
+
+    /* Typewriter Cursor */
+    .cursor-caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      background: #D946EF;
+      vertical-align: middle;
+      margin-left: 4px;
+      box-shadow: 0 0 10px #D946EF;
+      animation: blinkCursor 1s step-end infinite;
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navbar Dynamic Hover & Active Indicator System */
+    .nav-link {
+      position: relative;
+      color: #94A3B8;
+      transition: color 0.25s ease;
+      cursor: pointer;
+    }
+    .nav-link .nav-dot {
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* When hovering ANY nav link: glowing dot & white text */
+    .nav-link:hover {
+      color: #FFFFFF !important;
+    }
+    .nav-link:hover .nav-dot {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .nav-link:hover .nav-label {
+      color: #FDF2F8;
+      text-shadow: 0 0 12px rgba(217, 70, 239, 0.45);
+    }
+    /* Active Link State */
+    .nav-link.active {
+      color: #FFFFFF !important;
+    }
+    .nav-link.active .nav-dot {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .nav-link.active .nav-label {
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+    /* When desktopNav is hovered, soften the non-hovered active link so hovered link stands out */
+    #desktopNav:hover .nav-link.active:not(:hover) {
+      color: #94A3B8 !important;
+    }
+    #desktopNav:hover .nav-link.active:not(:hover) .nav-dot {
+      opacity: 0.35 !important;
+      transform: scale(0.8) !important;
+    }
+
+    /* Mobile Nav Link Indicator */
+    .mobile-nav-link {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .mobile-nav-link .mobile-dot {
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.2s ease;
+    }
+    .mobile-nav-link:hover {
+      color: #FFFFFF !important;
+    }
+    .mobile-nav-link:hover .mobile-dot {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .mobile-nav-link.active {
+      color: #FFFFFF !important;
+    }
+    .mobile-nav-link.active .mobile-dot {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+
+    /* Reduced Motion Mode */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001s !important;
+      }
+      .enter-nav, .enter-pill, .enter-headline, .enter-copy, .enter-cta, .enter-chips, .enter-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      .globe-video {
+        display: none !important;
+      }
+      .globe-still {
+        opacity: 1 !important;
+      }
+      .chip-float-1, .chip-float-2, .chip-float-3, .chip-float-4, .mouse-wheel {
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
 
-<body class="overflow-x-hidden leading-relaxed transition-colors duration-300">
+<body class="antialiased selection:bg-fuchsia-500/30 selection:text-white cosmic-dot-matrix">
 
-<!-- NAV -->
-<nav class="fixed top-0 left-0 right-0 z-50 px-8 py-4 flex justify-between items-center backdrop-blur-md border-b border-theme transition-all duration-300">
-  <div class="font-space font-bold text-lg text-blue-400 tracking-tight">LNA</div>
-  <div class="flex gap-8 items-center">
-    <a href="#about" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">About</a>
-    <a href="#skills" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">Skills</a>
-    <a href="#projects" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">Projects</a>
-    <a href="#contact" class="nav-link text-sm font-medium transition-colors duration-200 hidden sm:inline">Contact</a>
-    <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme"></button>
-  </div>
-</nav>
+  <!-- ==================== PERSISTENT FULL-PAGE COSMIC GLOBE BACKGROUND ==================== -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0" id="globalGlobeContainer">
+    <!-- Ambient Hero Glow Rim (Red, Blue, Magenta) -->
+    <div class="hero-glow-rim"></div>
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[380px] bg-blue-600/[0.09] blur-[110px] rounded-full pointer-events-none"></div>
 
-<!-- HERO -->
-<div class="relative min-h-screen flex flex-col justify-center items-center text-center px-8 pt-24 pb-16 overflow-hidden">
-  <canvas id="stars" class="absolute inset-0 w-full h-full"></canvas>
-  <div class="relative z-10">
-    <p class="font-mono text-xs text-blue-400 tracking-widest mb-6 opacity-80">// hello world — welcome to my portfolio</p>
-    <h1 class="font-space text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-3">
-      Luthfi Nurafiq<br><span class="text-blue-400">Asshiddiqi</span>
-    </h1>
-    <p class="font-mono text-base md:text-lg text-muted mb-8 min-h-[1.8em]" id="typewriter"><span class="cursor"></span></p>
-    <div class="flex gap-4 justify-center flex-wrap">
-      <a href="#projects" class="px-7 py-3 rounded-lg bg-blue-500 text-white font-semibold text-sm hover:opacity-90 hover:-translate-y-px transition-all duration-200">Lihat Projects</a>
-      <a href="#contact" class="px-7 py-3 rounded-lg border-2 border-blue-500 text-blue-400 font-semibold text-sm hover:bg-blue-500/10 hover:-translate-y-px transition-all duration-200">Hubungi Saya</a>
+    <!-- Thin Diagonal Light Lines Across Dark Sky -->
+    <svg class="light-lines-svg" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="none">
+      <line x1="-100" y1="200" x2="600" y2="700" stroke="url(#lineGrad1)" stroke-width="1" stroke-dasharray="3 7"></line>
+      <line x1="1000" y1="100" x2="1700" y2="600" stroke="url(#lineGrad2)" stroke-width="1" stroke-dasharray="2 6"></line>
+      <line x1="200" y1="50" x2="1400" y2="850" stroke="url(#lineGrad1)" stroke-width="0.75" stroke-opacity="0.3"></line>
+      <line x1="1400" y1="50" x2="300" y2="800" stroke="url(#lineGrad2)" stroke-width="0.75" stroke-opacity="0.25"></line>
+
+      <circle cx="350" cy="500" r="3" fill="#D946EF" filter="url(#glowFilter)"></circle>
+      <circle cx="1250" cy="300" r="2.5" fill="#38BDF8" filter="url(#glowFilter)"></circle>
+      <circle cx="800" cy="450" r="2" fill="#F43F5E"></circle>
+
+      <defs>
+        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D946EF" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#D946EF" stop-opacity="0.45"></stop>
+          <stop offset="100%" stop-color="#2563EB" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.4"></stop>
+          <stop offset="100%" stop-color="#FF3366" stop-opacity="0"></stop>
+        </linearGradient>
+        <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+          <feMerge>
+            <feMergeNode in="blur"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- Globe Plate (Still + Seamless Video Loop) -->
+    <div class="globe-plate" id="globePlate">
+      <!-- 1. Globe Still Layer -->
+      <img 
+        src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/f1631235-0a76-464d-8f1d-2c4b48a997d5.jpg" 
+        alt="Vaultra Particle Dotted Globe" 
+        class="globe-layer globe-still" 
+        id="globeStill"
+        loading="eager"
+      />
+      <!-- 2. Globe Video Layer (Rotating left to right, seamless loop, crossfading over still) -->
+      <video 
+        src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e71aea27-a808-4ae3-8231-a469d49285d4.mp4" 
+        class="globe-layer globe-video" 
+        id="globeVideo" 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        preload="auto"
+      ></video>
     </div>
   </div>
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-dimmer text-xs">
-    <span>scroll</span>
-    <div class="scroll-arrow"></div>
-  </div>
-</div>
 
-<!-- ABOUT -->
-<section id="about" class="py-20 px-8 max-w-4xl mx-auto">
-  <div class="reveal">
-    <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">01 // TENTANG SAYA</p>
-    <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Siapa Saya?</h2>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
-    <div>
-      <div class="w-28 h-28 rounded-full bg-gradient-to-br from-blue-500 to-blue-900 flex items-center justify-center font-space text-4xl font-bold text-white mb-6 border-4 border-blue-500 overflow-hidden flex-shrink-0">
-        <img src="images/124220021_Pas Foto_Warna.jpeg" alt="Foto Luthfi Nurafiq Asshiddiqi" class="w-full h-full object-cover block">
-      </div>
-      <div class="space-y-3">
-        <p class="text-muted text-sm">Saya adalah seorang fresh graduate S1 Sistem Informasi dari UPN "Veteran" Yogyakarta, dengan passion di bidang pengembangan web, mobile, dan backend.</p>
-        <p class="text-muted text-sm">Saya senang membangun produk digital yang tidak hanya fungsional, tetapi juga memberikan pengalaman pengguna yang menyenangkan.</p>
-      </div>
-    </div>
-    <div class="flex flex-col gap-4">
-      <div class="flex items-center gap-3 text-sm text-muted">
-        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">🎓</div>
-        <div><strong class="text-bright">S1 Sistem Informasi</strong><br>UPN "Veteran" Yogyakarta</div>
-      </div>
-      <div class="flex items-center gap-3 text-sm text-muted">
-        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">📍</div>
-        <div><strong class="text-bright">Yogyakarta</strong><br>Indonesia</div>
-      </div>
-      <div class="flex items-center gap-3 text-sm text-muted">
-        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">💼</div>
-        <div><strong class="text-bright">Open to Work</strong><br>Full-time / Freelance</div>
-      </div>
-      <div class="flex items-center gap-3 text-sm text-muted">
-        <div class="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center text-base flex-shrink-0">✉️</div>
-        <div><strong class="text-bright">luthfinurafiq76@email.com</strong><br>Siap untuk berkolaborasi</div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- ==================== FIXED NAVIGATION ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-6 sm:px-10 py-4 transition-all duration-300 backdrop-blur-xl bg-night-950/75 border-b border-white/[0.08] enter-nav">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Logo: Double Slash Mark -->
+      <a href="#" class="flex items-center gap-2 group cursor-pointer" aria-label="Luthfi Nurafiq Asshiddiqi Portfolio">
+        <span class="text-fuchsia-400 font-mono font-bold text-lg tracking-wider group-hover:text-fuchsia-300 transition-colors">//</span>
+        <span class="font-display font-semibold text-lg text-white tracking-tight">LNA</span>
+        <span class="hidden sm:inline-block text-[11px] font-mono text-slate-400 px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10 ml-2">Vaultra Edition</span>
+      </a>
 
-<!-- SKILLS -->
-<section id="skills" class="section-bg-alt py-20 px-8">
-  <div class="max-w-4xl mx-auto">
-    <div class="reveal">
-      <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">02 // KEAHLIAN</p>
-      <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Tech Stack</h2>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
+      <!-- Center Navigation Links -->
+      <nav id="desktopNav" class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium">
+        <a href="#hero" class="nav-link active flex items-center gap-2 py-1">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="#about" class="nav-link flex items-center gap-2 py-1">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          <span class="nav-label">About</span>
+        </a>
+        <a href="#skills" class="nav-link flex items-center gap-2 py-1">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          <span class="nav-label">Skills</span>
+        </a>
+        <a href="#projects" class="nav-link flex items-center gap-2 py-1">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          <span class="nav-label">Projects</span>
+        </a>
+        <a href="#contact" class="nav-link flex items-center gap-2 py-1">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          <span class="nav-label">Contact</span>
+        </a>
+      </nav>
 
-      <!-- React.js -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">⚛️</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">React.js</div>
-        <div class="text-xs text-muted mb-3">Membangun antarmuka web yang dinamis, responsif, dan interaktif dengan ekosistem React modern.</div>
-        <div class="flex flex-wrap gap-1">
-        </div>
-      </div>
+      <!-- Right Actions: Language Selector & Pill Buttons -->
+      <div class="flex items-center gap-3 sm:gap-4">
 
-      <!-- Golang -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">🐹</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">Golang</div>
-        <div class="text-xs text-muted mb-3">Mengembangkan backend dan REST API yang cepat, efisien, dan scalable menggunakan Go.</div>
-        <div class="flex flex-wrap gap-1">
-        </div>
-      </div>
+        <a href="https://drive.google.com/file/d/1_NRUy2C3vVQ7Z1y74mp8cVNGhzxrD-_i/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex cta-pill-outline px-4 py-1.5 text-xs">
+          Download CV
+        </a>
+        <a href="#contact" class="cta-pill-white px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">
+          Kontak Saya
+        </a>
 
-      <!-- Flutter -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">📱</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">Flutter</div>
-        <div class="text-xs text-muted mb-3">Membuat aplikasi mobile cross-platform untuk Android & iOS dari satu codebase.</div>
-        <div class="flex flex-wrap gap-1">
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Dart</span>
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Firebase</span>
-        </div>
-      </div>
-
-      <!-- Database -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">🗄️</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">Database</div>
-        <div class="text-xs text-muted mb-3">Merancang dan mengelola database relasional maupun non-relasional untuk berbagai kebutuhan.</div>
-        <div class="flex flex-wrap gap-1">
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">MySQL</span>
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">PostgreSQL</span>
-        </div>
-      </div>
-
-      <!-- Python Flask -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">🐍</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">Python Flask</div>
-        <div class="text-xs text-muted mb-3">Membangun backend ringan dan REST API dengan Python Flask.</div>
-        <div class="flex flex-wrap gap-1">
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Flask</span>
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Python</span>
-        </div>
-      </div>
-
-      <!-- Next.js -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">▲</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">Next.js</div>
-        <div class="text-xs text-muted mb-3">Membangun aplikasi web modern dengan rendering fleksibel dan pengalaman pengguna yang cepat.</div>
-        <div class="flex flex-wrap gap-1">
-        </div>
-      </div>
-
-      <!-- UI/UX -->
-      <div class="card-bg border rounded-xl p-6 transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-default">
-        <div class="text-3xl mb-3">🎨</div>
-        <div class="font-space text-base font-semibold mb-1 text-bright">UI/UX Design</div>
-        <div class="text-xs text-muted mb-3">Mendesain antarmuka yang intuitif dan estetis sebelum diimplementasikan ke kode.</div>
-        <div class="flex flex-wrap gap-1">
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Figma</span>
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Prototyping</span>
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Wireframe</span>
-        </div>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" aria-label="Toggle Mobile Menu" class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-lg bg-white/[0.05] border border-white/10 text-slate-300 focus:outline-none">
+          <span class="w-4 h-0.5 bg-slate-300 mb-1 transition-all"></span>
+          <span class="w-4 h-0.5 bg-slate-300 mb-1 transition-all"></span>
+          <span class="w-4 h-0.5 bg-slate-300 transition-all"></span>
+        </button>
       </div>
 
     </div>
-  </div>
-</section>
 
-<!-- PROJECTS -->
-<section id="projects" class="py-20 px-8 max-w-4xl mx-auto">
-  <div class="reveal">
-    <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">03 // PROYEK</p>
-    <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Yang Pernah Saya Buat</h2>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal">
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 border-t border-white/[0.06] mt-4 flex flex-col gap-3 text-sm">
+      <a href="#hero" class="mobile-nav-link active flex items-center gap-2 py-1.5 text-white">
+        <span class="mobile-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+        <span>Home</span>
+      </a>
+      <a href="#about" class="mobile-nav-link flex items-center gap-2 py-1.5 text-slate-400 hover:text-white">
+        <span class="mobile-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+        <span>About</span>
+      </a>
+      <a href="#skills" class="mobile-nav-link flex items-center gap-2 py-1.5 text-slate-400 hover:text-white">
+        <span class="mobile-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+        <span>Skills</span>
+      </a>
+      <a href="#projects" class="mobile-nav-link flex items-center gap-2 py-1.5 text-slate-400 hover:text-white">
+        <span class="mobile-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+        <span>Projects</span>
+      </a>
+      <a href="#contact" class="mobile-nav-link flex items-center gap-2 py-1.5 text-slate-400 hover:text-white">
+        <span class="mobile-dot w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+        <span>Contact</span>
+      </a>
+      <div class="pt-2 flex gap-2">
+        <a href="https://drive.google.com/file/d/1_NRUy2C3vVQ7Z1y74mp8cVNGhzxrD-_i/view?usp=sharing" target="_blank" class="w-full text-center cta-pill-outline py-2 text-xs">Download CV</a>
+      </div>
+    </div>
+  </header>
 
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="hero" class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-28 pb-20 overflow-hidden bg-transparent z-10">
     
+    <!-- Small Glass Coin & Tech Chips Floating Across Dark Sky -->
+    <div class="absolute inset-0 max-w-7xl mx-auto pointer-events-none enter-chips hidden md:block">
+      <!-- Left Glass Chip (Bitcoin / React) -->
+      <div class="glass-coin-chip chip-float-1 top-[28%] left-[8%]">
+        <span class="text-amber-400 font-bold">₿</span>
+        <span>React.js</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      </div>
+
+      <!-- Left Lower Glass Chip (Ethereum / Golang) -->
+      <div class="glass-coin-chip chip-float-2 top-[58%] left-[12%]">
+        <span class="text-indigo-400 font-bold">Ξ</span>
+        <span>Golang</span>
+      </div>
+
+      <!-- Right Glass Chip (Tether / Flutter) -->
+      <div class="glass-coin-chip chip-float-3 top-[26%] right-[8%]">
+        <span class="text-emerald-400 font-bold">₮</span>
+        <span>Flutter</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></span>
+      </div>
+
+      <!-- Right Lower Glass Chip (Hex Token / Next.js) -->
+      <div class="glass-coin-chip chip-float-4 top-[56%] right-[11%]">
+        <span class="text-cyan-400 font-bold">⬡</span>
+        <span>Next.js</span>
+      </div>
+    </div>
+
+    <!-- Center Hero Content -->
+    <div class="relative z-20 max-w-4xl mx-auto flex flex-col items-center">
+      
+      <!-- Glass Pill Badge -->
+      <div class="enter-pill mb-6">
+        <div class="glass-badge px-4 py-1.5 text-xs md:text-sm text-fuchsia-200">
+          <span class="text-amber-300">⚡</span>
+          <span class="font-mono text-slate-300 tracking-wide">// hello world — welcome to my portfolio</span>
+        </div>
+      </div>
+
+      <!-- Large Gradient Headline (Inter Display 300, ~66px) -->
+      <h1 class="enter-headline gradient-headline text-4xl sm:text-6xl md:text-[66px] leading-[1.1] mb-5">
+        Luthfi Nurafiq<br>
+        <span class="font-normal">Asshiddiqi</span>
+      </h1>
+
+      <!-- Subtitle Copy & Typewriter -->
+      <div class="enter-copy max-w-2xl mx-auto mb-8">
+        <p class="font-mono text-base md:text-lg text-slate-300 min-h-[2em] flex items-center justify-center">
+          <span id="typewriter"></span><span class="cursor-caret"></span>
+        </p>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="enter-cta flex flex-wrap gap-4 justify-center items-center">
+        <a href="#projects" class="cta-pill-white px-8 py-3.5 text-sm flex items-center gap-2 group">
+          <span>Lihat Projects</span>
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+        <a href="#contact" class="cta-pill-outline px-8 py-3.5 text-sm">
+          Hubungi Saya
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Scroll Hint with Mouse Indicator & Curved Token Hints -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 enter-scroll flex flex-col items-center gap-2 pointer-events-none">
+      <div class="flex items-center gap-3 text-[11px] font-mono tracking-widest text-slate-500 uppercase">
+        <span class="text-fuchsia-400/80">USDT</span>
+        <span>· scroll ·</span>
+        <span class="text-cyan-400/80">ETH</span>
+      </div>
+      <div class="w-5 h-8 rounded-full border border-slate-600/70 flex justify-center pt-1.5 bg-black/40 backdrop-blur-sm">
+        <div class="w-1 h-2 rounded-full bg-fuchsia-400 mouse-wheel"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Glowing Section Divider -->
+  <div class="vault-section-divider"></div>
+
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section id="about" class="relative py-28 px-6 sm:px-10 z-20 overflow-hidden bg-transparent">
     
+    <!-- Background Ambient Glow Orbs -->
+    <div class="glow-orb-magenta -top-20 -left-20"></div>
+    <div class="glow-orb-blue -bottom-20 -right-20"></div>
 
-    <!-- Project 1 -->
-    <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
-      <div class="h-50 overflow-hidden">
-        <img src="images/rijal.png" alt="Screenshot Sistem Absensi" class="w-full h-auto object-cover block">
-      </div>
-      <div class="p-6">
-        <div class="font-space text-base font-semibold mb-1 text-bright">Personal Portfolio - Geological Engineering</div>
-        <div class="text-xs text-muted mb-3">Platform portofolio web interaktif untuk profesional teknik geologi yang dilengkapi dashboard admin, viewer dokumen presentasi teknis (PPT/PDF), dukungan bilingual (ID/EN), serta integrasi cloud storage.</div>
-        <div class="flex flex-wrap gap-1 mb-3">
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Next.js</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Tailwind CSS</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Supabase</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">PostgreSQL</span>
+    <div class="max-w-5xl mx-auto relative z-10">
+      
+      <!-- Section Header with Glass Pill and Inter Gradient Title -->
+      <div class="reveal mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/25 text-fuchsia-300 font-mono text-xs tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          01 // TENTANG SAYA
         </div>
-        <div class="flex gap-2">
-          
-          <a href="https://github.com/PrenjakAlangAlang/portofoliorizal.git" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
-        </div>
+        <h2 class="section-gradient-title text-3xl sm:text-4xl md:text-5xl font-light">Siapa Saya?</h2>
       </div>
-    </div>
-    <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
-      <div class="h-50 overflow-hidden">
-        <img src="images/presensi.png" alt="Screenshot Sistem Absensi" class="w-full h-auto object-cover block">
-      </div>
-      <div class="p-6">
-        <div class="font-space text-base font-semibold mb-1 text-bright">Sistem Absensi Web Berbasis Geotagging</div>
-        <div class="text-xs text-muted mb-3">Sistem absensi siswa SMK berbasis web dengan validasi lokasi menggunakan algoritma Haversine. Dibangun untuk SMK Negeri 7 Yogyakarta.</div>
-        <div class="flex flex-wrap gap-1 mb-3">
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">PHP</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">MySQL</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Tailwind</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Haversine</span>
-        </div>
-        <div class="flex gap-2">
-          
-          <a href="https://github.com/PrenjakAlangAlang/Presensi-SMK.git" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 2 -->
-     <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
-      <div class="h-50 overflow-hidden">
-        <img src="images/Wiki.png" alt="Screenshot Website Wiki Pemda DIY" class="w-full h-auto object-cover block">
-      </div>
-      <div class="p-6">
-        <div class="font-space text-base font-semibold mb-1 text-bright">Website Wiki Pemda DIY</div>
-        <div class="text-xs text-muted mb-3">Website Wiki Pemda DIY yang dibuat menggunakan React untuk tampilan antarmuka dan Golang untuk backend API yang cepat dan terstruktur.</div>
-        <div class="flex flex-wrap gap-1 mb-3">
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">React.js</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Golang</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">REST API</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Web App</span>
-        </div>
-        <div class="flex gap-2">
-          
-          <a href="https://github.com/PrenjakAlangAlang/wiki.git" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
-        </div>
-      </div>
-    </div>
-    <!-- Project 3 -->
-<div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
-      <div class="h-50 overflow-hidden">
-        <img src="images/Alquran.png" alt="Screenshot Al-Quran Mobile" class="w-full h-auto object-cover block">
-      </div>
-      <div class="p-6">
-        <div class="font-space text-base font-semibold mb-1 text-bright">Al-Quran Mobile</div>
-        <div class="text-xs text-muted mb-3">Aplikasi mobile Al-Quran dengan tampilan sederhana untuk membaca surah dan ayat. Dibuat menggunakan Flutter dan didukung database Firebase.</div>
-        <div class="flex flex-wrap gap-1 mb-3">
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Flutter</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Dart</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Hive Database</span>
-          <span class="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-blue-500/10 text-blue-200">Mobile App</span>
-        </div>
-        <div class="flex gap-2">
-          
-          <a href="https://github.com/PrenjakAlangAlang/124220021_Luthfi-Nurafiq_PAM_SI-B.git" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
-        </div>
-      </div>
-    </div>
-    <!-- Project 4 -->
-     <div class="card-bg border rounded-2xl overflow-hidden transition-all duration-200 hover:border-blue-500 hover:-translate-y-1 cursor-pointer">
-      <div class="h-50 overflow-hidden">
-        <img src="images/wisata.png" alt="Screenshot Website Wisata Jogja" class="w-full h-auto object-cover block">
-      </div>
-      <div class="p-6">
-        <div class="font-space text-base font-semibold mb-1 text-bright">Website Wisata Jogja</div>
-        <div class="text-xs text-muted mb-3">Website wisata Jogja yang menampilkan informasi destinasi, rekomendasi tempat menarik, dan pengalaman eksplorasi yang lebih mudah bagi pengguna.</div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch reveal">
         
-        <div class="flex gap-2">
+        <!-- Profile Identity Plate (Left 5 Cols) -->
+        <div class="md:col-span-5 vault-glass-card p-8 flex flex-col items-center text-center justify-between relative overflow-hidden group">
+          <!-- Ambient Corner Light -->
+          <div class="absolute -top-12 -right-12 w-32 h-32 bg-fuchsia-500/20 blur-2xl rounded-full pointer-events-none group-hover:scale-125 transition-transform duration-700"></div>
           
-          <a href="https://github.com/PrenjakAlangAlang/Wisata.git" class="text-xs px-3 py-1.5 rounded-md border border-theme text-muted hover:border-blue-500 hover:text-blue-400 transition-all duration-200 font-medium">📂 GitHub</a>
+          <div class="w-full flex justify-between items-center text-[11px] font-mono text-slate-400 mb-6 pb-3 border-b border-white/[0.08]">
+            <span class="text-fuchsia-400">// IDENTITY</span>
+            <span class="px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 text-slate-300">ID: 124220021</span>
+          </div>
+
+          <div class="relative w-40 h-40 rounded-2xl p-1 bg-gradient-to-tr from-fuchsia-500 via-blue-500 to-cyan-400 shadow-[0_0_35px_rgba(217,70,239,0.35)] mb-6 overflow-hidden">
+            <img 
+              src="images/124220021_Pas Foto_Warna.jpeg" 
+              alt="Foto Luthfi Nurafiq Asshiddiqi" 
+              class="w-full h-full rounded-xl object-cover block"
+            >
+          </div>
+
+          <div class="w-full">
+            <h3 class="font-display font-medium text-xl text-white mb-1 tracking-tight">Luthfi Nurafiq Asshiddiqi</h3>
+            <p class="text-xs font-mono text-fuchsia-300 mb-5">S1 Sistem Informasi — UPNVY</p>
+            
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34D399]"></span>
+              Open to Work
+            </div>
+          </div>
+        </div>
+
+        <!-- Description & Parameter Nodes (Right 7 Cols) -->
+        <div class="md:col-span-7 flex flex-col justify-between gap-6">
+          
+          <!-- Narrative Glass Card -->
+          <div class="vault-glass-card p-7 text-slate-300 text-sm leading-relaxed space-y-4 relative">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-400 pb-3 border-b border-white/[0.06]">
+              <span class="text-blue-400">✦</span>
+              <span>BIOGRAPHY & BACKGROUND</span>
+            </div>
+            <p>
+              Saya adalah seorang fresh graduate S1 Sistem Informasi dari UPN "Veteran" Yogyakarta, dengan passion di bidang pengembangan web, mobile, dan backend.
+            </p>
+            <p>
+              Saya senang membangun produk digital yang tidak hanya fungsional, tetapi juga memberikan pengalaman pengguna yang menyenangkan.
+            </p>
+          </div>
+
+          <!-- Parameter Chips Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            
+            <!-- Education Node -->
+            <div class="vault-glass-card p-4 flex items-center gap-4 group">
+              <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 group-hover:border-blue-400 transition-all">
+                🎓
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Pendidikan</div>
+                <div class="font-medium text-white text-xs sm:text-sm">S1 Sistem Informasi</div>
+                <div class="text-[11px] text-slate-400 font-mono">UPN "Veteran" Yogyakarta</div>
+              </div>
+            </div>
+
+            <!-- Location Node -->
+            <div class="vault-glass-card p-4 flex items-center gap-4 group">
+              <div class="w-11 h-11 rounded-xl bg-fuchsia-500/10 border border-fuchsia-500/25 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 group-hover:border-fuchsia-400 transition-all">
+                📍
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Lokasi</div>
+                <div class="font-medium text-white text-xs sm:text-sm">Yogyakarta</div>
+                <div class="text-[11px] text-slate-400 font-mono">Indonesia</div>
+              </div>
+            </div>
+
+            <!-- Work Status Node -->
+            <div class="vault-glass-card p-4 flex items-center gap-4 group">
+              <div class="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 group-hover:border-cyan-400 transition-all">
+                💼
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Status</div>
+                <div class="font-medium text-white text-xs sm:text-sm">Open to Work</div>
+                <div class="text-[11px] text-slate-400 font-mono">Full-time / Freelance</div>
+              </div>
+            </div>
+
+            <!-- Collaboration Node -->
+            <div class="vault-glass-card p-4 flex items-center gap-4 group">
+              <div class="w-11 h-11 rounded-xl bg-violet-500/10 border border-violet-500/25 flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 group-hover:border-violet-400 transition-all">
+                ✉️
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Email</div>
+                <div class="font-medium text-white text-xs sm:text-sm truncate max-w-[140px]">luthfinurafiq76@email.com</div>
+                <div class="text-[11px] text-slate-400 font-mono">Siap untuk berkolaborasi</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Glowing Section Divider -->
+  <div class="vault-section-divider"></div>
+
+
+  <!-- ==================== SKILLS / TECH STACK SECTION ==================== -->
+  <section id="skills" class="relative py-28 px-6 sm:px-10 z-20 overflow-hidden bg-night-950/20">
+    
+    <!-- Ambient Red & Blue Background Glows -->
+    <div class="glow-orb-red top-1/4 -right-20"></div>
+    <div class="glow-orb-blue bottom-1/4 -left-20"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="reveal mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300 font-mono text-xs tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_#3B82F6]"></span>
+          02 // KEAHLIAN
+        </div>
+        <h2 class="section-gradient-title text-3xl sm:text-4xl md:text-5xl font-light">Tech Stack</h2>
+      </div>
+
+      <!-- Asset Grid: Styled as Vaultra Crypto Assets Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal">
+
+        <!-- Asset 1: React.js -->
+        <div class="asset-card p-6 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-cyan-400 transition-all shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                ⚛️
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                RCT · WEB
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors">React.js</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Membangun antarmuka web yang dinamis, responsif, dan interaktif dengan ekosistem React modern.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">Frontend</span>
+            <span class="glass-tag">SPA</span>
+          </div>
+        </div>
+
+        <!-- Asset 2: Golang -->
+        <div class="asset-card p-6 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-blue-400 transition-all shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+                🐹
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                GOL · SYS
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-blue-300 transition-colors">Golang</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Mengembangkan backend dan REST API yang cepat, efisien, dan scalable menggunakan Go.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">Backend</span>
+            <span class="glass-tag">REST API</span>
+          </div>
+        </div>
+
+        <!-- Asset 3: Flutter -->
+        <div class="asset-card p-6 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/25 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-sky-400 transition-all shadow-[0_0_15px_rgba(14,165,233,0.15)]">
+                📱
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20">
+                FLT · MOB
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-sky-300 transition-colors">Flutter</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Membuat aplikasi mobile cross-platform untuk Android & iOS dari satu codebase.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">Dart</span>
+            <span class="glass-tag">Firebase</span>
+          </div>
+        </div>
+
+        <!-- Asset 4: Database -->
+        <div class="asset-card p-6 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/25 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-violet-400 transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+                🗄️
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-violet-500/10 text-violet-300 border border-violet-500/20">
+                DB · DATA
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-violet-300 transition-colors">Database</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Merancang dan mengelola database relasional maupun non-relasional untuk berbagai kebutuhan.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">MySQL</span>
+            <span class="glass-tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <!-- Asset 5: Python Flask -->
+        <div class="asset-card p-6 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-amber-400 transition-all shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+                🐍
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                PY · FLASK
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-amber-300 transition-colors">Python Flask</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Membangun backend ringan dan REST API dengan Python Flask.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">Flask</span>
+            <span class="glass-tag">Python</span>
+          </div>
+        </div>
+
+        <!-- Asset 6: Next.js -->
+        <div class="asset-card p-6 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-slate-700/40 border border-slate-500/30 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-white/40 transition-all shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                ▲
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-white/[0.06] text-white border border-white/10">
+                NXT · PRO
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-fuchsia-300 transition-colors">Next.js</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5">
+              Membangun aplikasi web modern dengan rendering fleksibel dan pengalaman pengguna yang cepat.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">SSR / SSG</span>
+            <span class="glass-tag">Fullstack</span>
+          </div>
+        </div>
+
+        <!-- Asset 7: UI/UX Design (Full Width Span) -->
+        <div class="asset-card p-6 flex flex-col justify-between group sm:col-span-2 lg:col-span-3">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 border border-fuchsia-500/25 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-fuchsia-400 transition-all shadow-[0_0_15px_rgba(217,70,239,0.15)]">
+                🎨
+              </div>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-full bg-fuchsia-500/10 text-fuchsia-300 border border-fuchsia-500/20">
+                UI / UX · DESIGN
+              </span>
+            </div>
+            <h3 class="font-display text-lg font-medium text-white mb-2 group-hover:text-fuchsia-300 transition-colors">UI/UX Design</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-5 max-w-2xl">
+              Mendesain antarmuka yang intuitif dan estetis sebelum diimplementasikan ke kode.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-white/[0.07]">
+            <span class="glass-tag">Figma</span>
+            <span class="glass-tag">Prototyping</span>
+            <span class="glass-tag">Wireframe</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Glowing Section Divider -->
+  <div class="vault-section-divider"></div>
+
+
+  <!-- ==================== PROJECTS SECTION ==================== -->
+  <section id="projects" class="relative py-28 px-6 sm:px-10 z-20 overflow-hidden bg-transparent">
+    
+    <!-- Ambient Magenta & Blue Background Glows -->
+    <div class="glow-orb-magenta top-1/3 -left-20"></div>
+    <div class="glow-orb-blue bottom-1/3 -right-20"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="reveal mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 font-mono text-xs tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#38BDF8]"></span>
+          03 // PROYEK
+        </div>
+        <h2 class="section-gradient-title text-3xl sm:text-4xl md:text-5xl font-light">Yang Pernah Saya Buat</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+
+        <!-- Project 1: Personal Portfolio Geological Engineering -->
+        <div class="project-card flex flex-col group">
+          <div class="h-56 overflow-hidden bg-night-950 relative border-b border-white/[0.08]">
+            <img 
+              src="images/rijal.png" 
+              alt="Screenshot Personal Portfolio Geological Engineering" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-night-950/90 via-night-950/20 to-transparent pointer-events-none"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300">
+                Next.js · Supabase
+              </span>
+            </div>
+          </div>
+          <div class="p-7 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-display text-base font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                Personal Portfolio - Geological Engineering
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-5">
+                Platform portofolio web interaktif untuk profesional teknik geologi yang dilengkapi dashboard admin, viewer dokumen presentasi teknis (PPT/PDF), dukungan bilingual (ID/EN), serta integrasi cloud storage.
+              </p>
+            </div>
+            <div>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="glass-tag">Next.js</span>
+                <span class="glass-tag">Tailwind CSS</span>
+                <span class="glass-tag">Supabase</span>
+                <span class="glass-tag">PostgreSQL</span>
+              </div>
+              <a 
+                href="https://github.com/PrenjakAlangAlang/portofoliorizal.git" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="cta-pill-outline px-4 py-2 text-xs inline-flex items-center gap-2 group-hover:border-cyan-400 group-hover:text-cyan-200"
+              >
+                <span>📂 GitHub</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Sistem Absensi Web Berbasis Geotagging -->
+        <div class="project-card flex flex-col group">
+          <div class="h-56 overflow-hidden bg-night-950 relative border-b border-white/[0.08]">
+            <img 
+              src="images/presensi.png" 
+              alt="Screenshot Sistem Absensi Web Berbasis Geotagging" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-night-950/90 via-night-950/20 to-transparent pointer-events-none"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300">
+                PHP · Geotag
+              </span>
+            </div>
+          </div>
+          <div class="p-7 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-display text-base font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                Sistem Absensi Web Berbasis Geotagging
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-5">
+                Sistem absensi siswa SMK berbasis web dengan validasi lokasi menggunakan algoritma Haversine. Dibangun untuk SMK Negeri 7 Yogyakarta.
+              </p>
+            </div>
+            <div>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="glass-tag">PHP</span>
+                <span class="glass-tag">MySQL</span>
+                <span class="glass-tag">Tailwind</span>
+                <span class="glass-tag">Haversine</span>
+              </div>
+              <a 
+                href="https://github.com/PrenjakAlangAlang/Presensi-SMK.git" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="cta-pill-outline px-4 py-2 text-xs inline-flex items-center gap-2 group-hover:border-cyan-400 group-hover:text-cyan-200"
+              >
+                <span>📂 GitHub</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Website Wiki Pemda DIY -->
+        <div class="project-card flex flex-col group">
+          <div class="h-56 overflow-hidden bg-night-950 relative border-b border-white/[0.08]">
+            <img 
+              src="images/Wiki.png" 
+              alt="Screenshot Website Wiki Pemda DIY" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-night-950/90 via-night-950/20 to-transparent pointer-events-none"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300">
+                React · Golang
+              </span>
+            </div>
+          </div>
+          <div class="p-7 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-display text-base font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                Website Wiki Pemda DIY
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-5">
+                Website Wiki Pemda DIY yang dibuat menggunakan React untuk tampilan antarmuka dan Golang untuk backend API yang cepat dan terstruktur.
+              </p>
+            </div>
+            <div>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="glass-tag">React.js</span>
+                <span class="glass-tag">Golang</span>
+                <span class="glass-tag">REST API</span>
+                <span class="glass-tag">Web App</span>
+              </div>
+              <a 
+                href="https://github.com/PrenjakAlangAlang/wiki.git" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="cta-pill-outline px-4 py-2 text-xs inline-flex items-center gap-2 group-hover:border-cyan-400 group-hover:text-cyan-200"
+              >
+                <span>📂 GitHub</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: Al-Quran Mobile -->
+        <div class="project-card flex flex-col group">
+          <div class="h-56 overflow-hidden bg-night-950 relative border-b border-white/[0.08]">
+            <img 
+              src="images/Alquran.png" 
+              alt="Screenshot Al-Quran Mobile" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-night-950/90 via-night-950/20 to-transparent pointer-events-none"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300">
+                Flutter · Mobile
+              </span>
+            </div>
+          </div>
+          <div class="p-7 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-display text-base font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                Al-Quran Mobile
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-5">
+                Aplikasi mobile Al-Quran dengan tampilan sederhana untuk membaca surah dan ayat. Dibuat menggunakan Flutter dan didukung database Firebase.
+              </p>
+            </div>
+            <div>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="glass-tag">Flutter</span>
+                <span class="glass-tag">Dart</span>
+                <span class="glass-tag">Hive Database</span>
+                <span class="glass-tag">Mobile App</span>
+              </div>
+              <a 
+                href="https://github.com/PrenjakAlangAlang/124220021_Luthfi-Nurafiq_PAM_SI-B.git" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="cta-pill-outline px-4 py-2 text-xs inline-flex items-center gap-2 group-hover:border-cyan-400 group-hover:text-cyan-200"
+              >
+                <span>📂 GitHub</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Website Wisata Jogja (Full Width / 2-col span) -->
+        <div class="project-card flex flex-col group md:col-span-2">
+          <div class="h-60 sm:h-72 overflow-hidden bg-night-950 relative border-b border-white/[0.08]">
+            <img 
+              src="images/wisata.png" 
+              alt="Screenshot Website Wisata Jogja" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-night-950/90 via-night-950/20 to-transparent pointer-events-none"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300">
+                Tourism Web App
+              </span>
+            </div>
+          </div>
+          <div class="p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            <div>
+              <h3 class="font-display text-base font-medium text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                Website Wisata Jogja
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
+                Website wisata Jogja yang menampilkan informasi destinasi, rekomendasi tempat menarik, dan pengalaman eksplorasi yang lebih mudah bagi pengguna.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <a 
+                href="https://github.com/PrenjakAlangAlang/Wisata.git" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="cta-pill-outline px-5 py-2.5 text-xs inline-flex items-center gap-2 group-hover:border-cyan-400 group-hover:text-cyan-200"
+              >
+                <span>📂 GitHub</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Glowing Section Divider -->
+  <div class="vault-section-divider"></div>
+
+
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section id="contact" class="relative py-28 px-6 sm:px-10 z-20 overflow-hidden bg-night-950/30">
+    
+    <!-- Ambient Red / Magenta / Blue Glow Reflections -->
+    <div class="glow-orb-magenta bottom-0 right-1/4"></div>
+    <div class="glow-orb-blue bottom-0 left-1/4"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="reveal text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/25 text-fuchsia-300 font-mono text-xs tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#D946EF]"></span>
+          04 // KONTAK
+        </div>
+        <h2 class="section-gradient-title text-3xl sm:text-4xl md:text-5xl font-light mb-4">Mari Berkolaborasi</h2>
+        <p class="text-slate-300 text-sm max-w-md mx-auto leading-relaxed">
+          Saya terbuka untuk peluang kerja, proyek freelance, atau sekadar ngobrol soal teknologi. Jangan ragu untuk menghubungi saya!
+        </p>
+      </div>
+
+      <!-- Futuristic Contact Console -->
+      <div class="vault-glass-card p-8 sm:p-14 reveal text-center relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-fuchsia-500/15 blur-3xl rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-500/15 blur-3xl rounded-full pointer-events-none"></div>
+
+        <div class="flex justify-center gap-3 sm:gap-4 flex-wrap relative z-10">
+          <a 
+            href="mailto:luthfinurafiq76@email.com" 
+            class="cta-pill-outline px-6 py-3.5 text-xs sm:text-sm flex items-center gap-2.5 hover:border-fuchsia-400 hover:text-fuchsia-300 hover:scale-105"
+          >
+            <span>✉️</span>
+            <span>Email</span>
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/luthfi-nurafiq-asshiddiqi-637803205/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="cta-pill-outline px-6 py-3.5 text-xs sm:text-sm flex items-center gap-2.5 hover:border-blue-400 hover:text-blue-300 hover:scale-105"
+          >
+            <span>💼</span>
+            <span>LinkedIn</span>
+          </a>
+          <a 
+            href="https://github.com/PrenjakAlangAlang" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="cta-pill-outline px-6 py-3.5 text-xs sm:text-sm flex items-center gap-2.5 hover:border-slate-300 hover:text-white hover:scale-105"
+          >
+            <span>🐙</span>
+            <span>GitHub</span>
+          </a>
+          <a 
+            href="https://drive.google.com/file/d/1_NRUy2C3vVQ7Z1y74mp8cVNGhzxrD-_i/view?usp=sharing" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="cta-pill-white px-7 py-3.5 text-xs sm:text-sm flex items-center gap-2.5 hover:scale-105"
+          >
+            <span>📄</span>
+            <span>Download CV</span>
+          </a>
         </div>
       </div>
     </div>
-    
+  </section>
+
+  <!-- Glowing Section Divider -->
+  <div class="vault-section-divider"></div>
 
 
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section-bg-alt py-20 px-8">
-  <div class="max-w-4xl mx-auto">
-    <div class="reveal">
-      <p class="font-mono text-xs text-blue-400 tracking-widest mb-3">04 // KONTAK</p>
-      <h2 class="font-space text-3xl md:text-4xl font-bold tracking-tight mb-10">Mari Berkolaborasi</h2>
-    </div>
-    <div class="card-bg border rounded-2xl p-12 text-center reveal">
-      <p class="text-muted mb-8 max-w-sm mx-auto text-sm">Saya terbuka untuk peluang kerja, proyek freelance, atau sekadar ngobrol soal teknologi. Jangan ragu untuk menghubungi saya!</p>
-      <div class="flex justify-center gap-3 flex-wrap">
-        <a href="mailto:luthfinurafiq76@email.com" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">✉️ Email</a>
-        <a href="https://www.linkedin.com/in/luthfi-nurafiq-asshiddiqi-637803205/" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">💼 LinkedIn</a>
-        <a href="https://github.com/PrenjakAlangAlang" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">🐙 GitHub</a>
-        <a href="https://drive.google.com/file/d/1_NRUy2C3vVQ7Z1y74mp8cVNGhzxrD-_i/view?usp=sharing" class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-theme text-muted text-sm hover:border-blue-500 hover:text-blue-400 hover:bg-blue-500/8 transition-all duration-200">📄 Download CV</a>
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="relative py-10 px-6 sm:px-10 text-xs text-slate-500 bg-night-950/80 backdrop-blur-md z-20">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-2">
+        <span class="text-fuchsia-400 font-mono font-bold text-sm">//</span>
+        <span class="font-display font-medium text-slate-300 text-sm">Luthfi Nurafiq Asshiddiqi</span>
+        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 ml-2">● Online</span>
       </div>
+
+      <p class="text-center">
+        Dibuat oleh <strong class="text-slate-300 font-medium">Luthfi Nurafiq Asshiddiqi</strong> · 2026
+      </p>
+
+      <a href="#" class="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-400 hover:text-white transition-colors">
+        <span>Back to top</span>
+        <span>↑</span>
+      </a>
+
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- FOOTER -->
-<footer class="text-center py-8 px-8 text-dimmer text-xs border-t border-theme">
-  <p>Dibuat oleh <strong class="text-muted">Luthfi Nurafiq Asshiddiqi</strong> · 2026</p>
-</footer>
 
-<script>
-// Theme toggle
-const toggle = document.getElementById('themeToggle');
-let dark = true;
-toggle.addEventListener('click', () => {
-  dark = !dark;
-  document.body.classList.toggle('light', !dark);
-});
+  <!-- ==================== VANILLA JAVASCRIPT ==================== -->
+  <script>
+    // 1. Globe Video Seamless Overlay & Fade-in
+    const globeVideo = document.getElementById('globeVideo');
+    const globeStill = document.getElementById('globeStill');
 
-// Typewriter
-const roles = [
-  'Full-Stack Web Developer',
-  'Mobile App Developer (Flutter)',
-  'Backend Engineer (Golang)',
-  'S1 Sistem Informasi — UPNVY'
-];
-let ri = 0, ci = 0, del = false;
-const tw = document.getElementById('typewriter');
-function type() {
-  const cur = roles[ri];
-  if (!del) {
-    ci++;
-    tw.innerHTML = cur.slice(0, ci) + '<span class="cursor"></span>';
-    if (ci === cur.length) { del = true; setTimeout(type, 1800); return; }
-  } else {
-    ci--;
-    tw.innerHTML = cur.slice(0, ci) + '<span class="cursor"></span>';
-    if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
-  }
-  setTimeout(type, del ? 40 : 80);
-}
-type();
+    if (globeVideo) {
+      const showVideo = () => {
+        globeVideo.classList.add('is-ready');
+      };
 
-// Stars canvas
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-let stars = [];
-function resize() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
-function initStars() {
-  stars = [];
-  for (let i = 0; i < 170; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.4 + 0.5,
-      o: Math.random() * 0.6 + 0.25,
-      s: Math.random() * 0.35 + 0.08
+      if (globeVideo.readyState >= 2) {
+        showVideo();
+      } else {
+        globeVideo.addEventListener('loadeddata', showVideo);
+        globeVideo.addEventListener('canplay', showVideo);
+        globeVideo.addEventListener('playing', showVideo);
+      }
+
+      globeVideo.addEventListener('ended', () => {
+        globeVideo.currentTime = 0;
+        globeVideo.play().catch(() => {});
+      });
+
+      const playPromise = globeVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.warn('Globe video autoplay paused:', error);
+        });
+      }
+    }
+
+    // 2. Typewriter Effect
+    const roles = [
+      'Full-Stack Web Developer',
+      'Mobile App Developer (Flutter)',
+      'Backend Engineer (Golang)',
+      'S1 Sistem Informasi — UPNVY'
+    ];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typewriterEl = document.getElementById('typewriter');
+
+    function handleTypewriter() {
+      if (!typewriterEl) return;
+      const currentRole = roles[roleIdx];
+
+      if (!isDeleting) {
+        charIdx++;
+        typewriterEl.textContent = currentRole.slice(0, charIdx);
+        if (charIdx === currentRole.length) {
+          isDeleting = true;
+          setTimeout(handleTypewriter, 1800);
+          return;
+        }
+      } else {
+        charIdx--;
+        typewriterEl.textContent = currentRole.slice(0, charIdx);
+        if (charIdx === 0) {
+          isDeleting = false;
+          roleIdx = (roleIdx + 1) % roles.length;
+        }
+      }
+      setTimeout(handleTypewriter, isDeleting ? 38 : 75);
+    }
+    handleTypewriter();
+
+    // 3. Scroll Reveal Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // 4. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+
+    // 5. Dynamic Navbar ScrollSpy & Active Link Indicator
+    const navSections = document.querySelectorAll('section[id]');
+    const desktopLinks = document.querySelectorAll('#desktopNav .nav-link');
+    const mobileLinks = document.querySelectorAll('#mobileMenu .mobile-nav-link');
+
+    function syncNavActive() {
+      const scrollPosition = window.pageYOffset + 220;
+      let currentSectionId = 'hero';
+
+      navSections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          currentSectionId = sec.getAttribute('id');
+        }
+      });
+
+      // Update desktop nav
+      desktopLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentSectionId}` || (currentSectionId === 'hero' && (href === '#' || href === '#hero'))) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Update mobile nav
+      mobileLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentSectionId}` || (currentSectionId === 'hero' && (href === '#' || href === '#hero'))) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', syncNavActive, { passive: true });
+    syncNavActive();
+
+    // Click handler to immediately reflect active target
+    [...desktopLinks, ...mobileLinks].forEach(link => {
+      link.addEventListener('click', function() {
+        const href = this.getAttribute('href');
+        desktopLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === href));
+        mobileLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === href));
+      });
     });
-  }
-}
-function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  stars.forEach(s => {
-    s.o += s.s * (Math.random() > 0.5 ? 1 : -1);
-    s.o = Math.max(0.2, Math.min(0.95, s.o));
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.shadowColor = 'rgba(96,165,250,0.55)';
-    ctx.shadowBlur = 8;
-    ctx.fillStyle = `rgba(191,219,254,${s.o})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawStars);
-}
-resize(); initStars(); drawStars();
-window.addEventListener('resize', () => { resize(); initStars(); });
+  </script>
 
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-reveals.forEach(r => obs.observe(r));
-</script>
 </body>
 </html>
